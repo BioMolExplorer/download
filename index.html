@@ -220,7 +220,7 @@
         </svg>
         <div class="platform-name">Linux</div>
         <div class="platform-detail">Debian / Ubuntu · .deb</div>
-        <a class="btn-download" href="https://github.com/peudias/test-ic/releases/latest/download/biomolexplorer_amd64.deb" target="_blank" rel="noopener">
+        <a class="btn-download" href="https://github.com/BioMolExplorer/download/releases/latest/download/biomolexplorer_amd64.deb" target="_blank" rel="noopener">
           <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24"
             fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
             <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
@@ -288,7 +288,7 @@
 
     setLang(localStorage.getItem('lang') || 'en');
 
-    fetch('https://raw.githubusercontent.com/Lucas-Roseno/BioMolExplorer/main/package.json')
+    fetch('https://raw.githubusercontent.com/BioMolExplorer/download/main/package.json')
       .then(r => r.json())
       .then(pkg => { document.getElementById('version').textContent = 'v' + pkg.version; })
       .catch(() => { document.getElementById('version').textContent = '—'; });
