@@ -1,0 +1,298 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>BioMolExplorer - Download</title>
+  <link rel="icon" type="image/png" sizes="32x32" href="icons/32x32.png" />
+  <link rel="icon" type="image/png" sizes="256x256" href="icons/256x256.png" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      background-color: #F4F6F8;
+      font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+
+    header {
+      background-color: #5b4382;
+      color: white;
+      padding: 15px 30px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    }
+
+    .logo {
+      font-size: 26px;
+      font-weight: 500;
+      letter-spacing: 0.5px;
+      display: flex;
+      align-items: center;
+    }
+
+    .logo-icon { font-size: 32px; margin-right: 12px; margin-bottom: 4px; }
+
+    .lang-switcher {
+      display: flex;
+      gap: 4px;
+      background: rgba(255,255,255,0.12);
+      border-radius: 6px;
+      padding: 3px;
+    }
+
+    .lang-btn {
+      background: none;
+      border: none;
+      color: rgba(255,255,255,0.65);
+      font-size: 13px;
+      font-weight: 600;
+      font-family: inherit;
+      padding: 5px 10px;
+      border-radius: 4px;
+      cursor: pointer;
+      transition: background 0.15s, color 0.15s;
+      letter-spacing: 0.3px;
+    }
+
+    .lang-btn.active {
+      background: rgba(255,255,255,0.2);
+      color: white;
+    }
+
+    .lang-btn:hover:not(.active) { color: rgba(255,255,255,0.9); }
+
+    main {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      padding: 48px 20px;
+    }
+
+    h1 {
+      color: #333;
+      font-size: 24px;
+      font-weight: 500;
+      margin-bottom: 8px;
+      text-align: center;
+    }
+
+    .subtitle {
+      color: #888;
+      font-size: 15px;
+      margin-bottom: 12px;
+      text-align: center;
+    }
+
+    .version-badge {
+      font-size: 13px;
+      color: #aaa;
+      margin-bottom: 36px;
+      text-align: center;
+    }
+
+    .version-badge #version {
+      font-weight: 600;
+      color: #5b4382;
+    }
+
+    .platforms {
+      display: flex;
+      gap: 20px;
+      flex-wrap: wrap;
+      justify-content: center;
+      width: 100%;
+      max-width: 780px;
+    }
+
+    .platform-card {
+      background: white;
+      border-radius: 10px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.06);
+      padding: 32px 28px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      width: 220px;
+      border: 2px solid transparent;
+      transition: border-color 0.2s, box-shadow 0.2s;
+    }
+
+    .platform-card.available:hover {
+      border-color: #5b4382;
+      box-shadow: 0 6px 20px rgba(91,67,130,0.12);
+    }
+
+    .platform-card.soon { opacity: 0.55; }
+
+    .platform-icon {
+      width: 52px;
+      height: 52px;
+      margin-bottom: 14px;
+      color: #5b4382;
+    }
+
+    .platform-card.soon .platform-icon { color: #aaa; }
+
+    .platform-name {
+      font-size: 17px;
+      font-weight: 600;
+      color: #333;
+      margin-bottom: 4px;
+    }
+
+    .platform-detail {
+      font-size: 12px;
+      color: #999;
+      margin-bottom: 20px;
+    }
+
+    .badge-soon {
+      display: inline-block;
+      font-size: 11px;
+      font-weight: 600;
+      background: #f0f0f0;
+      color: #999;
+      padding: 5px 14px;
+      border-radius: 20px;
+      letter-spacing: 0.5px;
+    }
+
+    .btn-download {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background-color: #5b4382;
+      color: white;
+      text-decoration: none;
+      font-size: 14px;
+      font-weight: 500;
+      padding: 11px 24px;
+      border-radius: 6px;
+      transition: background-color 0.2s, box-shadow 0.2s;
+      box-shadow: 0 2px 6px rgba(91,67,130,0.3);
+      white-space: nowrap;
+    }
+
+    .btn-download:hover {
+      background-color: #4a3570;
+      box-shadow: 0 4px 12px rgba(91,67,130,0.4);
+    }
+
+    footer {
+      text-align: center;
+      padding: 20px;
+      color: #999999;
+      font-size: 13px;
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <div class="logo">
+      <span class="logo-icon">⬡</span>BioMolExplorer
+    </div>
+    <div class="lang-switcher">
+      <button class="lang-btn" onclick="setLang('pt')">PT</button>
+      <button class="lang-btn" onclick="setLang('en')">EN</button>
+    </div>
+  </header>
+
+  <main>
+    <h1 data-i18n="title"></h1>
+    <p class="subtitle" data-i18n="subtitle"></p>
+    <p class="version-badge"><span data-i18n="versionLabel"></span>&nbsp;<span id="version">...</span></p>
+
+    <div class="platforms">
+
+      <!-- Linux -->
+      <div class="platform-card available">
+        <svg class="platform-icon" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+          <path d="M12 2C9.37 2 7.58 3.55 6.67 5.48 5.74 7.46 5.74 9.64 6.09 11.33c.18.85.45 1.6.77 2.17-.48.5-.86 1.12-.86 1.86 0 .78.34 1.44.87 1.93C5.62 17.94 4 19.18 4 21c0 .55.45 1 1 1h14c.55 0 1-.45 1-1 0-1.82-1.62-3.06-2.87-3.71.53-.49.87-1.15.87-1.93 0-.74-.38-1.36-.86-1.86.32-.57.59-1.32.77-2.17.35-1.69.35-3.87-.58-5.85C16.42 3.55 14.63 2 12 2zm0 2c1.93 0 3.08 1.08 3.77 2.55.71 1.52.71 3.39.41 4.84-.18.87-.47 1.55-.78 1.97-.18.24-.35.38-.46.44a1 1 0 0 0-.44.4c-.14.25-.5.8-.5.8s-.36-.55-.5-.8a1 1 0 0 0-.44-.4c-.11-.06-.28-.2-.46-.44-.31-.42-.6-1.1-.78-1.97-.3-1.45-.3-3.32.41-4.84C8.92 5.08 10.07 4 12 4zm-1 9.5c.28 0 .5.22.5.5s-.22.5-.5.5-.5-.22-.5-.5.22-.5.5-.5zm2 0c.28 0 .5.22.5.5s-.22.5-.5.5-.5-.22-.5-.5.22-.5.5-.5zM8.5 17c.42.32 1 .63 1.62.82L9.5 19H8c.05-.67.23-1.35.5-2zm7 0c.27.65.45 1.33.5 2h-1.5l-.62-1.18c.62-.19 1.2-.5 1.62-.82z"/>
+        </svg>
+        <div class="platform-name">Linux</div>
+        <div class="platform-detail">Debian / Ubuntu · .deb</div>
+        <a class="btn-download" href="https://github.com/peudias/test-ic/releases/latest/download/biomolexplorer_amd64.deb" target="_blank" rel="noopener">
+          <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24"
+            fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
+            <polyline points="7 10 12 15 17 10"/>
+            <line x1="12" y1="15" x2="12" y2="3"/>
+          </svg>
+          <span data-i18n="download"></span>
+        </a>
+      </div>
+
+      <!-- Windows -->
+      <div class="platform-card soon">
+        <svg class="platform-icon" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+          <path d="M3 5.6L10.5 4.5V11.5H3V5.6ZM11.5 4.35L21 3V11.5H11.5V4.35ZM3 12.5H10.5V19.5L3 18.4V12.5ZM11.5 12.5H21V21L11.5 19.65V12.5Z"/>
+        </svg>
+        <div class="platform-name">Windows</div>
+        <div class="platform-detail">.exe</div>
+        <span class="badge-soon" data-i18n="soon"></span>
+      </div>
+
+      <!-- macOS -->
+      <div class="platform-card soon">
+        <svg class="platform-icon" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+          <path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.8-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/>
+        </svg>
+        <div class="platform-name">macOS</div>
+        <div class="platform-detail">.dmg</div>
+        <span class="badge-soon" data-i18n="soon"></span>
+      </div>
+
+    </div>
+  </main>
+
+  <footer>&copy; 2026 BioMolExplorer</footer>
+
+  <script>
+    const translations = {
+      pt: {
+        title:        'Download do Instalador',
+        subtitle:     'Escolha a versão para o seu sistema operacional',
+        versionLabel: 'Versão atual:',
+        download:     'Baixar',
+        soon:         'Em breve',
+      },
+      en: {
+        title:        'Installer Download',
+        subtitle:     'Choose the version for your operating system',
+        versionLabel: 'Current version:',
+        download:     'Download',
+        soon:         'Coming soon',
+      },
+    };
+
+    function setLang(lang) {
+      localStorage.setItem('lang', lang);
+      document.documentElement.lang = lang === 'pt' ? 'pt-BR' : 'en-US';
+      const t = translations[lang];
+      document.querySelectorAll('[data-i18n]').forEach(el => {
+        el.textContent = t[el.dataset.i18n] ?? '';
+      });
+      document.querySelectorAll('.lang-btn').forEach(btn => {
+        btn.classList.toggle('active', btn.textContent === lang.toUpperCase());
+      });
+    }
+
+    setLang(localStorage.getItem('lang') || 'en');
+
+    fetch('https://raw.githubusercontent.com/Lucas-Roseno/BioMolExplorer/main/package.json')
+      .then(r => r.json())
+      .then(pkg => { document.getElementById('version').textContent = 'v' + pkg.version; })
+      .catch(() => { document.getElementById('version').textContent = '—'; });
+  </script>
+
+</body>
+</html>
