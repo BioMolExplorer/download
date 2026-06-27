@@ -288,7 +288,7 @@
 
     setLang(localStorage.getItem('lang') || 'en');
 
-    fetch('https://raw.githubusercontent.com/BioMolExplorer/download/main/package.json')
+    fetch('https://raw.githubusercontent.com/Lucas-Roseno/BioMolExplorer/main/package.json')
       .then(r => r.json())
       .then(pkg => { document.getElementById('version').textContent = 'v' + pkg.version; })
       .catch(() => { document.getElementById('version').textContent = '—'; });
