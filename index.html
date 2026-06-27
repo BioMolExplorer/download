@@ -27,15 +27,36 @@
       box-shadow: 0 2px 4px rgba(0,0,0,0.1);
     }
 
+    .header-left {
+      display: flex;
+      align-items: center;
+      gap: 20px;
+    }
+
     .logo {
       font-size: 26px;
       font-weight: 500;
       letter-spacing: 0.5px;
       display: flex;
       align-items: center;
+      text-decoration: none;
+      color: white;
     }
 
     .logo-icon { font-size: 32px; margin-right: 12px; margin-bottom: 4px; }
+
+    .nav-link {
+      color: rgba(255,255,255,0.75);
+      text-decoration: none;
+      font-size: 14px;
+      font-weight: 500;
+      padding: 5px 10px;
+      border-radius: 4px;
+      transition: color 0.15s, background 0.15s;
+    }
+
+    .nav-link:hover { color: white; background: rgba(255,255,255,0.12); }
+    .nav-link.active { color: white; background: rgba(255,255,255,0.18); }
 
     .lang-switcher {
       display: flex;
@@ -186,6 +207,38 @@
       box-shadow: 0 4px 12px rgba(91,67,130,0.4);
     }
 
+    .btn-guide {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background: none;
+      color: #5b4382;
+      text-decoration: none;
+      font-size: 13px;
+      font-weight: 500;
+      padding: 8px 18px;
+      border-radius: 6px;
+      border: 1.5px solid #5b4382;
+      transition: background-color 0.2s, color 0.2s;
+      margin-top: 8px;
+      white-space: nowrap;
+    }
+
+    .btn-guide:hover {
+      background-color: #5b4382;
+      color: white;
+    }
+
+    .platform-card.soon .btn-guide {
+      border-color: #aaa;
+      color: #aaa;
+    }
+
+    .platform-card.soon .btn-guide:hover {
+      background-color: #aaa;
+      color: white;
+    }
+
     footer {
       text-align: center;
       padding: 20px;
@@ -197,12 +250,15 @@
 <body>
 
   <header>
-    <div class="logo">
-      <span class="logo-icon">⬡</span>BioMolExplorer
+    <div class="header-left">
+      <a class="logo" href="index.html">
+        <span class="logo-icon">⬡</span>BioMolExplorer
+      </a>
+      <a class="nav-link active" href="index.html">Download</a>
     </div>
     <div class="lang-switcher">
-      <button class="lang-btn" onclick="setLang('pt')">PT-BR</button>
-      <button class="lang-btn" onclick="setLang('en')">EN-US</button>
+      <button class="lang-btn" data-lang="pt" onclick="setLang('pt')">🇧🇷 PT-BR</button>
+      <button class="lang-btn" data-lang="en" onclick="setLang('en')">🇺🇸 EN-US</button>
     </div>
   </header>
 
@@ -229,6 +285,9 @@
           </svg>
           <span data-i18n="download"></span>
         </a>
+        <a class="btn-guide" href="userguide.html?platform=linux">
+          <span data-i18n="userGuide"></span>
+        </a>
       </div>
 
       <!-- Windows -->
@@ -239,6 +298,9 @@
         <div class="platform-name">Windows</div>
         <div class="platform-detail">.exe</div>
         <span class="badge-soon" data-i18n="soon"></span>
+        <a class="btn-guide" href="userguide.html?platform=windows">
+          <span data-i18n="userGuide"></span>
+        </a>
       </div>
 
       <!-- macOS -->
@@ -249,6 +311,9 @@
         <div class="platform-name">macOS</div>
         <div class="platform-detail">.dmg</div>
         <span class="badge-soon" data-i18n="soon"></span>
+        <a class="btn-guide" href="userguide.html?platform=macos">
+          <span data-i18n="userGuide"></span>
+        </a>
       </div>
 
     </div>
@@ -264,6 +329,7 @@
         versionLabel: 'Versão atual:',
         download:     'Baixar',
         soon:         'Em breve',
+        userGuide:    'Guia do Usuário',
       },
       en: {
         title:        'Installer Download',
@@ -271,6 +337,7 @@
         versionLabel: 'Current version:',
         download:     'Download',
         soon:         'Coming soon',
+        userGuide:    'User Guide',
       },
     };
 
@@ -282,7 +349,7 @@
         el.textContent = t[el.dataset.i18n] ?? '';
       });
       document.querySelectorAll('.lang-btn').forEach(btn => {
-        btn.classList.toggle('active', btn.textContent === lang.toUpperCase());
+        btn.classList.toggle('active', btn.dataset.lang === lang);
       });
     }
 
